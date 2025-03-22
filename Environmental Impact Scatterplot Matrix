@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# # Read data file
+# Read data file
 data = pd.read_csv('Results_21Mar2022.csv')
 
 # Aggregate data by diet type
