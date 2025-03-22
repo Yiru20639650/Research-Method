@@ -1,2 +1,28 @@
-[InternetShortcut]
-URL=http://localhost:8888/notebooks/Untitled17.ipynb
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# # Read data file
+data = pd.read_csv('Results_21Mar2022.csv')
+
+# Aggregate data by diet type
+agg_data = data.groupby('diet_group').agg({
+    'mean_ghgs': 'mean',
+    'mean_land': 'mean',
+    'mean_watscar': 'mean',
+    'mean_eut': 'mean',
+    'mean_bio': 'mean',
+    'mean_watuse': 'mean',
+    'mean_acid': 'mean'
+}).reset_index()
+
+# Set plot style
+sns.set(style="whitegrid")
+
+# Create scatterplot matrix
+pairplot_fig = sns.pairplot(agg_data, hue='diet_group', diag_kind='kde', height=2.5)
+
+# Set plot title and display
+pairplot_fig.fig.suptitle("Environmental Impact Scatterplot Matrix", y=1.02)
+plt.tight_layout()
+plt.show()
